@@ -29,3 +29,14 @@ class MainTest(TestCase):
         self.client.login(username="joe", password="joepassword")
         post_object = self.client.post(url, {'user': superuser, 'title': 'TDD', 'body': 'I am practicing TDD'})
         self.assertTrue(isinstance(post_object, Post))"""
+
+    def test_post_page_displays_posts_200(self):
+        url = reverse('list_posts')
+        resp = self.client.get(url)
+        self.assertEqual(resp.status_code, 200)
+
+    def test_posts_are_actually_on_the_page(self):
+        Post(title="TDD", body="TDD is fun")
+        url = reverse('list_posts')
+        resp = self.client.get(url)
+        self.assertContains(resp, 'TDD')
