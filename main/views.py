@@ -1,3 +1,6 @@
-from django.shortcuts import render
+from django.views.generic import TemplateView
 
-# Create your views here.
+
+class Home(TemplateView):
+    """Home page when users login"""
+    template_name = 'main/home.html'

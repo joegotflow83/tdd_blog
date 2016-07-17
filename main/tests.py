@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 
 from .models import Post
 
@@ -12,3 +13,7 @@ class MainTest(TestCase):
         post = Post.objects.create(user=user, title="TDD", body="I am practicing tdd")
         self.assertTrue(isinstance(post, Post))
 
+    def test_home_page_is_displayed_200(self):
+        url = reverse('home')
+        resp = self.client.get(url)
+        self.assertEqual(resp.status_code, 200)
