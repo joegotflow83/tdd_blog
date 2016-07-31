@@ -3,6 +3,6 @@
 {% block content %}
 <h3>Posts:</h3>
 {% for post in object_list %}
-  <h4>{{ post.title }}</h4>
+  <h4><a href="{% url single_post post.pk %}">{{ post.title }}</a></h4>
 {% endfor %}
 {% endblock %}

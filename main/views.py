@@ -1,4 +1,4 @@
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import CreateView
 from django.core.urlresolvers import reverse
 
@@ -28,3 +28,11 @@ class CreatePost(CreateView):
 class ListPosts(ListView):
     """List posts created by all users"""
     model = Post
+
+
+class SinglePost(DetailView):
+    """Users can view a single post"""
+    model = Post
+
+    def get_queryset(self):
+        return Post.objects.filter(pk=self.kwargs['pk'])

@@ -40,3 +40,10 @@ class MainTest(TestCase):
         url = reverse('list_posts')
         resp = self.client.get(url)
         self.assertContains(resp, 'TDD')
+
+    def test_user_can_view_a_post(self):
+        user = User.objects.create(username="joe")
+        post = Post.objects.create(user=user, title="TDD", body="TDD is fun")
+        url = reverse('single_post', kwargs={'pk': post.pk})
+        resp = self.client.get(url)
+        self.assertEqual(resp.status_code, 200)
